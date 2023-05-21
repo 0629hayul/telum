@@ -29,12 +29,11 @@ async def on_message(message):
 
     if message.content.startswith(f'{PREFIX}hello'):
         await message.channel.send('Hello!')
- 
     if message.channel.id == 1109828429261590669:
         author_id = str(message.author.id)
         today = datetime.date.today()
 
-        # 사용자가 처음 메시지를 보내는 경우
+        # 사용자가 처음 메시지를 보내는 경우 또는 제한 시간이 지난 경우
         if author_id not in cooldown_dict or cooldown_dict[author_id] < today:
             cooldown_dict[author_id] = today
             # 관리자가 확인할 수 있도록 원하는 작업을 수행하고, 이 부분은 알맞게 수정해야 합니다.
@@ -44,7 +43,7 @@ async def on_message(message):
             # 이미 메시지를 보낸 경우
             await message.delete()
             # 제한 시간 계산
-            remaining_time_seconds = (datetime.datetime.now() + cooldown_time) - datetime.datetime.now()
+            remaining_time_seconds = (cooldown_dict[author_id] + cooldown_time) - datetime.datetime.now()
             remaining_time_hours = int(remaining_time_seconds.total_seconds() // 3600)
             remaining_time_minutes = int((remaining_time_seconds.total_seconds() % 3600) // 60)
             remaining_time = f"{remaining_time_hours}시간 {remaining_time_minutes}분"
