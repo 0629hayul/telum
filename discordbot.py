@@ -11,7 +11,7 @@ load_dotenv()
 PREFIX = os.environ['PREFIX']
 TOKEN = os.environ['TOKEN']
 cooldown_dict = {}
-cooldown_time = datetime.timedelta(days=1)
+cooldown_time = datetime.timedelta(seconds=86400)
 
 client = discord.Client()
 
