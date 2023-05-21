@@ -11,7 +11,7 @@ load_dotenv()
 PREFIX = os.environ['PREFIX']
 TOKEN = os.environ['TOKEN']
 cooldown_dict = {}
-cooldown_time = datetime.timedelta(hours=24)
+cooldown_time = datetime.timedelta(days=1)
 
 client = discord.Client()
 
@@ -50,7 +50,6 @@ async def on_message(message):
             # DM으로 알림 전송
             dm_message = f"1일 1회 제한 (남은시간: {remaining_time})"
             await message.author.send(dm_message)
-
 
 try:
     client.run(TOKEN)
