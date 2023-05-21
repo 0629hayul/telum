@@ -58,7 +58,7 @@ async def on_message(message):
         # 딕셔너리에 사용자 ID와 오늘 날짜 저장
         cooldown_dict[author_id] = today
 
-    await client.process_commands(message)
+        await client.process_commands(message)
 
 try:
     client.run(TOKEN)
