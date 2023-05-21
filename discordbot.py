@@ -30,12 +30,12 @@ async def on_message(message):
     if message.content.startswith(f'{PREFIX}hello'):
         await message.channel.send('Hello!')
     if message.channel.id == 1109828429261590669:
-        author_id = str(message.author.id)
-        today = datetime.datetime.now().date()
+        author_id = str(message.author.id) 
+        today = datetime.datetime.now().date() #
 
         # 사용자가 처음 메시지를 보내는 경우 또는 제한 시간이 지난 경우
         if author_id not in cooldown_dict or cooldown_dict[author_id] < today:
-            cooldown_dict[author_id] = today
+            cooldown_dict[author_id] = 86400
             # 관리자가 확인할 수 있도록 원하는 작업을 수행하고, 이 부분은 알맞게 수정해야 합니다.
             # 여기서는 관리자가 해당 메시지를 확인한다고 가정하고, 콘솔에 출력합니다.
             print(f"New message: {message.content}")
