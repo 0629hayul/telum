@@ -9,7 +9,7 @@ load_dotenv()
 
 PREFIX = os.environ['PREFIX']
 TOKEN = os.environ['TOKEN']
-cooldown_dict = {}
+cooldowns = {}
 #cooldown_time = datetime.timedelta(seconds=86400)
 
 client = discord.Client()
@@ -22,25 +22,32 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
+    if message.channel.id == 1109828429261590669:  # 특정 체널 ID
+        author_id = message.author.id
 
-    if message.content == f'{PREFIX}call':
-        await message.channel.send("callback!")
-
-    if message.content.startswith(f'{PREFIX}hello'):
-        await message.channel.send('Hello!')
-    cooldown_time = timedelta(hours=24)  # 쿨다운 시간
-
-    if message.channel.id == 1109828429261590669:
-        author_id = str(message.author.id)
-        now = datetime.now()
-
-        if author_id in cooldown_dict and cooldown_dict[author_id] > now:
+        if author_id not in cooldowns or cooldowns[author_id] == 0:
+            cooldowns[author_id] = 86400
+            await process_commands(message)
+        else:
             await message.delete()
-            return
+            await message.author.send(f"You are on cooldown. Please wait for {cooldowns[author_id]} seconds.")
 
-        cooldown_dict[author_id] = now + cooldown_time
+    cooldown_task = asyncio.create_task(decrease_cooldown(author_id))
+    await cooldown_task
+async def decrease_cooldown(author_id):
+    while cooldowns.get(author_id, 0) > 0:
+        cooldowns[author_id] -= 1
+        await asyncio.sleep(1)
+    if author_id in cooldowns:
+        del cooldowns[author_id]
 
-    await client.process_commands(message)
+async def process_commands(message):
+    if not message.content.startswith('!'):
+        return
+
+    ctx = await client.get_context(message)
+    if ctx.command is None:
+        return
 
 try:
     client.run(TOKEN)
