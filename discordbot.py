@@ -54,4 +54,7 @@ async def process_commands(message):
             await ctx.author.send(f"You are on cooldown. Please wait for {cooldown_seconds} seconds.")
 
 
-client.run('YOUR_TOKEN')
+try:
+    client.run(TOKEN)
+except discord.errors.LoginFailure as e:
+    print("Improper token has been passed.")
