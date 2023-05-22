@@ -53,8 +53,5 @@ async def process_commands(message):
             cooldown_seconds = round(cooldown)
             await ctx.author.send(f"You are on cooldown. Please wait for {cooldown_seconds} seconds.")
 
-@client.command()
-async def test(ctx):
-    await ctx.send("This is a test command.")
 
 client.run('YOUR_TOKEN')
