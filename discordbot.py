@@ -1,6 +1,15 @@
 import discord
 from discord.ext import commands
 import asyncio
+from cmath import log
+from distutils.sysconfig import PREFIX
+import discord
+from dotenv import load_dotenv
+from discord.ext import commands
+import os
+import datetime
+
+load_dotenv()
 
 intents = discord.Intents.default()
 intents.typing = False
