@@ -4,6 +4,7 @@ import discord
 from dotenv import load_dotenv
 from discord.ext import commands
 import os
+import time
 import asyncio
 from datetime import timedelta
 load_dotenv()
@@ -38,7 +39,7 @@ async def on_message(message):
 async def decrease_cooldown(author_id):
     while cooldowns.get(author_id, 0) > 0:
         cooldowns[author_id] -= 1
-        await asyncio.sleep(1)
+        await time.sleep(1)
     if author_id in cooldowns:
         del cooldowns[author_id]
 
