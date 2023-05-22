@@ -26,16 +26,8 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    user_id = message.author.id
-    now = datetime.datetime.now()
-
-    if user_id in msg_ed and msg_ed[user_id] == 1:
-        await message.delete()
-        return
-
-    msg_ed[user_id] = 1
-    await client.process_commands(message)
-    
+    if message.channel.id == 1109828429261590669:
+        await message.channel.send("callback!")    
    
 # 매일 오전 1시에 유저별 메시지 보낸 여부 초기화
 async def reset_msg_ed():
@@ -48,6 +40,7 @@ async def reset_msg_ed():
         
         
 try:
+    client.loop.create_task(reset_msg_ed())
     client.run(TOKEN)
 except discord.errors.LoginFailure as e:
     print("Improper token has been passed.")
