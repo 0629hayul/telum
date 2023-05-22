@@ -27,7 +27,7 @@ async def on_message(message):
         author_id = message.author.id
 
         if author_id not in cooldowns or cooldowns[author_id] == 0:
-            cooldowns[author_id] = 86400
+            cooldowns[author_id] = 30
             await process_commands(message)
         else:
             await message.delete()
