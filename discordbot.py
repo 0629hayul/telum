@@ -27,7 +27,7 @@ async def on_message(message):
         return
 
     user_id = message.author.id
-    now = datetime.now()
+    now = datetime.datetime.now()
 
     if user_id in msg_ed and msg_ed[user_id] == 1:
         await message.delete()
