@@ -33,12 +33,12 @@ async def on_message(message):
 
         if author_id not in cooldowns or cooldowns[author_id] == 0:
             cooldowns[author_id] = 30
+            await decrease_cooldown(author_id)
             await process_commands(message)
         else:
             await message.delete()
             await message.author.send(f"You are on cooldown. Please wait for {cooldowns[author_id]} seconds.")
 
-    await decrease_cooldown(author_id)
 
 async def decrease_cooldown(author_id):
     while cooldowns.get(author_id, 0) > 0:
