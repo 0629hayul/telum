@@ -41,7 +41,7 @@ async def on_message(message):
 async def reset_msg_ed():
     await client.wait_until_ready()
     while not client.is_closed():
-        now = datetime.now()
+        now = datetime.datetime.now()
         if now.hour == 1 and now.minute == 0:
             msg_ed.clear()
         await asyncio.sleep(60)  # 60초(1분)마다 반복
