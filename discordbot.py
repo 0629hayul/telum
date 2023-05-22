@@ -31,7 +31,7 @@ async def on_message(message):
         await message.channel.send('Hello!')
     cooldown_time = timedelta(hours=24)  # 쿨다운 시간
 
-    if message.channel.id == channel_id:
+    if message.channel.id == 1109828429261590669:
         author_id = str(message.author.id)
         now = datetime.now()
 
