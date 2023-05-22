@@ -65,9 +65,9 @@ async def reset_msg_ed():
     while not client.is_closed():
         now = datetime.datetime.now()
         if now.hour == 1 and now.minute == 0:
-        for guild in client.guilds:
-            for member in guild.members:
-                msg_ed[member.id] = 0
+            for guild in client.guilds:
+                for member in guild.members:
+                    msg_ed[member.id] = 0
         await asyncio.sleep(60)  # 60초(1분)마다 반복
         
         
