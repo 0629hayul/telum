@@ -5,7 +5,8 @@ import asyncio
 intents = discord.Intents.default()
 intents.typing = False
 intents.presences = False
-
+PREFIX = os.environ['PREFIX']
+TOKEN = os.environ['TOKEN']
 client = discord.Client(intents=intents)
 cooldowns = {}
 
